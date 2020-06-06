@@ -9,10 +9,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var txtValue: String = ""
+    @State var characterArray = [String]()
+    
     var body: some View {
-        List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-            Text("Hello, World!")
-        }
+        VStack{
+            //TextField("Enter some text", text: $txtValue, onCommit: )
+            TextField("Enter some text", text: $txtValue, onCommit: {
+                self.addTxtValue()
+            }).textFieldStyle(RoundedBorderTextFieldStyle())
+            
+            List(characterArray, id: \.self){ char in
+                Text(char)
+            }.animation(.default)
+            
+        }.padding()
+    }
+    
+    func addTxtValue() {
+        characterArray.append(txtValue)
     }
 }
 
